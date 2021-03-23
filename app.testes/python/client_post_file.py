@@ -1,7 +1,9 @@
 import requests
+import os
 
-file = open('/home/labdesktop/Desktop/ContratoMouser/papelada', 'r')
-json_return = {'file' : file}
-req = requests.post('http://192.168.1.9:5000/upload', json=json_return)
+user = os.getlogin()
+file = open('/home/{}/Desktop/ContratoMouser/papelada'.format(user), 'rb')
+files = {'file': ('papelada', file)}
+req = requests.post('http://192.168.1.9:5000/upload', files=files)
 print("\nstatus:",req.text)
 print("\njson:", req.json)

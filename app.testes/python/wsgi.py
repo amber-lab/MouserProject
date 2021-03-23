@@ -1,4 +1,5 @@
 from flask import Flask, url_for, render_template, request, jsonify
+from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 @app.route('/')
@@ -31,5 +32,6 @@ def login():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
 	if request.method == 'POST':
-		dir(request)
+		file = request.files['file']
+		print("--------\n",secure_filename(file.filename),"\n--------")
 	return render_template('file_upload_template.html')
